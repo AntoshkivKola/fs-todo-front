@@ -9,7 +9,6 @@ import styles from './TaskForm.module.scss';
 const TaskForm = props => {
   const { createTaskAction } = props;
   const onSubmit = (values, formikBag) => {
-    console.log('TaskForm', values);
 
     createTaskAction(values);
     formikBag.resetForm();

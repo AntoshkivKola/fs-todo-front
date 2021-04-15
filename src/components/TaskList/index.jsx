@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { format,parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import * as TaskActionCreators from '../../actions/taskCreators';
 import styles from './TaskList.module.scss';
 
@@ -12,6 +12,7 @@ const TaskList = props => {
     getTaskRequstAction,
     updateTaskRequstAction,
     deleteTaskRequstAction,
+    closeTaskErrorAction,
   } = props;
 
   const onChange = id => ({ target: { checked } }) => {
@@ -33,8 +34,13 @@ const TaskList = props => {
   return (
     <section className={styles.listSection}>
       <h1 className={styles.listTitle}>Task List</h1>
-      {isFetching && 'LOADING...'}
-      {error && JSON.stringify(error)}
+      {isFetching && <span className={styles.loading}> LOADING... </span>}
+      {error && (
+        <div className={styles.error}>
+          <span> {error.message}</span>
+          <button className={styles.deleteBtn} onClick={closeTaskErrorAction}>X</button>
+        </div>
+      )}
       <ul className={styles.list}>
         {tasks.map(task => (
           <li className={styles.item} key={task.id}>
@@ -50,7 +56,7 @@ const TaskList = props => {
             <span className={styles.body}>{task.body}</span>
             <span className={styles.deadline}>
               {task.deadline
-                ? format(parseISO(task.deadline),"yyyy-MM-dd' 'HH:mm:ss")
+                ? format(parseISO(task.deadline), "yyyy-MM-dd' 'HH:mm:ss")
                 : '-'}
             </span>
 
@@ -71,6 +77,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(TaskActionCreators.updateTaskRequest({ id, values })),
   deleteTaskRequstAction: id =>
     dispatch(TaskActionCreators.deleteTaskRequest({ id })),
+  closeTaskErrorAction: () => dispatch(TaskActionCreators.closeTaskError()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

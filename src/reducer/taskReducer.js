@@ -128,6 +128,14 @@ function taskReducer (state = initialState, action) {
         error: error,
       };
     }
+    // 
+    case ACTION_TYPES.CLOSE_TASK_ERROR: {
+      return {
+        ...state,
+        error: null,
+      };
+    }
+
     default: {
       return state;
     }

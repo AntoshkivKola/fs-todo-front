@@ -60,3 +60,7 @@ export const deleteTaskError = ({ error }) => ({
   type: ACTION_TYPES.DELETE_TASK_ERROR,
   payload: { error },
 });
+
+export const closeTaskError = () => ({
+  type: ACTION_TYPES.CLOSE_TASK_ERROR,
+});
