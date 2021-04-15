@@ -1,16 +1,16 @@
 import ACTION_TYPES from './actionTypes';
 
-export const createTaskRequest = values => ({
+export const createTaskRequest = ({ values }) => ({
   type: ACTION_TYPES.CREATE_TASK_REQUEST,
   payload: { values },
 });
 
-export const createTaskSuccess = ({ id, values }) => ({
+export const createTaskSuccess = ({ task }) => ({
   type: ACTION_TYPES.CREATE_TASK_SUCCESS,
-  payload: { id, values },
+  payload: { task },
 });
 
-export const createTaskError = error => ({
+export const createTaskError = ({ error }) => ({
   type: ACTION_TYPES.CREATE_TASK_ERROR,
   payload: { error },
 });
