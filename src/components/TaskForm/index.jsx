@@ -1,6 +1,5 @@
 import { Formik, Form, Field } from 'formik';
 
-import { useState } from 'react';
 import * as TaskActionCreator from '../../actions/taskCreators';
 import { connect } from 'react-redux';
 import styles from './TaskForm.module.scss';
@@ -8,17 +7,8 @@ import styles from './TaskForm.module.scss';
 const TaskForm = props => {
   const { createTaskAction } = props;
 
-  const [deadLine, setDeadline] = useState(null);
-
-  const onDeadlineChange = ({ target }) => {
-    setDeadline(target.value);
-  };
-
   const onSubmit = (values, formikBag) => {
-    createTaskAction({
-      ...values,
-      deadline: deadLine,
-    });
+    createTaskAction(values);
     formikBag.resetForm();
   };
 
@@ -37,13 +27,7 @@ const TaskForm = props => {
           className={styles.input}
         />
         <span className={styles.label}>Set deadline:</span>
-        <Field
-          name='deadline'
-          type='datetime-local'
-          value={deadLine}
-          onChange={onDeadlineChange}
-          className={styles.input}
-        />
+        <Field name='deadline' type='datetime-local' className={styles.input} />
 
         <button className={styles.submitBtn} type='submit'>
           Create Task
