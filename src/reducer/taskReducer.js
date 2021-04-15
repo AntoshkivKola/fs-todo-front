@@ -36,6 +36,98 @@ function taskReducer (state = initialState, action) {
         error: error,
       };
     }
+    //
+    case ACTION_TYPES.GET_TASK_REQUEST: {
+      return {
+        ...state,
+        isFetching: true,
+      };
+    }
+    case ACTION_TYPES.GET_TASK_SUCCESS: {
+      const { tasks } = state;
+      const {
+        payload: { tasks: newTasks },
+      } = action;
+      return {
+        ...state,
+        isFetching: false,
+        error: null,
+        tasks: [...tasks, ...newTasks],
+      };
+    }
+    case ACTION_TYPES.GET_TASK_ERROR: {
+      const {
+        payload: { error },
+      } = action;
+      return {
+        ...state,
+        isFetching: false,
+        error: error,
+      };
+    }
+    //
+    case ACTION_TYPES.UPDATE_TASK_REQUEST: {
+      return {
+        ...state,
+        isFetching: true,
+      };
+    }
+    case ACTION_TYPES.UPDATE_TASK_SUCCESS: {
+      const { tasks } = state;
+      const {
+        payload: { task: updateTask },
+      } = action;
+
+      const updateTaskIndex = tasks.findIndex(({ id }) => id === updateTask.id);
+      tasks[updateTaskIndex].isDone = updateTask.isDone;
+
+      return {
+        ...state,
+        isFetching: false,
+        error: null,
+        tasks: [...tasks],
+      };
+    }
+    case ACTION_TYPES.UPDATE_TASK_ERROR: {
+      const {
+        payload: { error },
+      } = action;
+      return {
+        ...state,
+        isFetching: false,
+        error: error,
+      };
+    }
+    //
+    case ACTION_TYPES.DELETE_TASK_REQUEST: {
+      return {
+        ...state,
+        isFetching: true,
+      };
+    }
+    case ACTION_TYPES.DELETE_TASK_SUCCESS: {
+      const { tasks } = state;
+      const {
+        payload: { id },
+      } = action;
+
+      return {
+        ...state,
+        isFetching: false,
+        error: null,
+        tasks: tasks.filter(task => task.id !== id),
+      };
+    }
+    case ACTION_TYPES.DELETE_TASK_ERROR: {
+      const {
+        payload: { error },
+      } = action;
+      return {
+        ...state,
+        isFetching: false,
+        error: error,
+      };
+    }
     default: {
       return state;
     }
