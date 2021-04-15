@@ -9,10 +9,13 @@ export function * createTaskSaga (action) {
         data: [task],
       },
     } = yield API.createTask(action.payload.values);
-
     yield put(TaskActionCreator.createTaskSuccess({ task }));
   } catch (error) {
-    yield put(TaskActionCreator.createTaskError({ error }));
+    yield put(
+      TaskActionCreator.createTaskError({
+        error: error.response.data.errors[0],
+      })
+    );
   }
 }
 
@@ -46,7 +49,7 @@ export function * updateTaskSaga (action) {
 export function * deleteTaskSaga (action) {
   try {
     const { id } = action.payload;
-   
+
     yield API.deleteTask({ id });
     yield put(TaskActionCreator.deleteTaskSuccess({ id }));
   } catch (error) {

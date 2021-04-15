@@ -37,7 +37,7 @@ const TaskList = props => {
       {isFetching && <span className={styles.loading}> LOADING... </span>}
       {error && (
         <div className={styles.error}>
-          <span> {error.message}</span>
+          <span>Error! {error.message}</span>
           <button className={styles.deleteBtn} onClick={closeTaskErrorAction}>X</button>
         </div>
       )}
