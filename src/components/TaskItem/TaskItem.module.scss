@@ -1,0 +1,45 @@
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.id {
+}
+.body {
+  margin: 5px 10px;
+  font-size: 20px;
+  width: 350px;
+}
+.deadline {
+  margin: 5px 10px;
+  font-size: 20px;
+  width: 200px;
+  text-align: center;
+  color: rgb(75, 70, 70);
+}
+.isDone {
+  width: 25px;
+  height: 25px;
+}
+.deleteBtn,
+.isDone {
+  cursor: pointer;
+}
+.deleteBtn {
+  width: 30px;
+  height: 30px;
+  padding: 2px;
+
+  background-color: rgba(229, 190, 190, 0.144);
+  color: red;
+  font-size: 20px;
+  text-align: center;
+
+  border: none;
+  border-radius: 5px;
+}
+.deleteBtn:hover {
+  background-color: rgba(199, 148, 148, 0.239);
+}
+
