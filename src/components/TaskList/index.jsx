@@ -17,9 +17,7 @@ const TaskList = props => {
     getTaskRequstAction({ limit: 5, offset: tasks.length });
   };
 
-  tasks.sort((a, b) => {
-    return a.id - b.id;
-  });
+  const sortedTasks = [...tasks].sort((a, b) => a.id - b.id);
 
   return (
     <section className={styles.listSection}>
@@ -27,7 +25,7 @@ const TaskList = props => {
       {isFetching && <TaskLoading />}
       {error && <TaskError error={error} />}
       <ul className={styles.list}>
-        {tasks.map(task => (
+        {sortedTasks.map(task => (
           <TaskItem key={task.id} task={task} />
         ))}
       </ul>
