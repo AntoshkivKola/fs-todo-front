@@ -10,8 +10,12 @@ const TaskList = props => {
   const { tasks, isFetching, error, getTaskRequstAction } = props;
 
   useEffect(() => {
-    getTaskRequstAction();
+    getTaskRequstAction({ limit: 5, offset: 0 });
   }, []);
+
+  const loadMore = () => {
+    getTaskRequstAction({ limit: 5, offset: tasks.length });
+  };
 
   tasks.sort((a, b) => {
     return a.id - b.id;
@@ -27,13 +31,17 @@ const TaskList = props => {
           <TaskItem key={task.id} task={task} />
         ))}
       </ul>
+      <button onClick={loadMore} className={styles.loadMore}>
+        Load more tasks
+      </button>
     </section>
   );
 };
 
 const mapStateToProps = ({ task }) => task;
 const mapDispatchToProps = dispatch => ({
-  getTaskRequstAction: () => dispatch(TaskActionCreators.getTaskRequest()),
+  getTaskRequstAction: ({ limit, offset }) =>
+    dispatch(TaskActionCreators.getTaskRequest({ limit, offset })),
 
   closeTaskErrorAction: () => dispatch(TaskActionCreators.closeTaskError()),
 });

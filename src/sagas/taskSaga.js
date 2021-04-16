@@ -22,8 +22,11 @@ export function * createTaskSaga (action) {
 export function * getTasksSaga (action) {
   try {
     const {
+      payload: { limit, offset },
+    } = action;
+    const {
       data: { data: tasks },
-    } = yield API.getTasks();
+    } = yield API.getTasks({ limit, offset });
 
     yield put(TaskActionCreator.getTaskSuccess({ tasks }));
   } catch (error) {
