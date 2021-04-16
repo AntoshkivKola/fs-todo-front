@@ -9,17 +9,9 @@ export const createTask = data => {
   return responsePromise;
 };
 
-export const getTasks = () => {
-  const responsePromise = httpClient.get('/tasks');
-  return responsePromise;
-};
+export const getTasks = () => httpClient.get('/tasks');
 
-export const updateTask = ({ id, values }) => {
-  const responsePromise = httpClient.patch(`/tasks/${id}`, values);
-  return responsePromise;
-};
+export const updateTask = ({ id, values }) =>
+  httpClient.patch(`/tasks/${id}`, values);
 
-export const deleteTask = ({ id }) => {
-  const responsePromise = httpClient.delete(`/tasks/${id}`);
-  return responsePromise;
-};
+export const deleteTask = ({ id }) => httpClient.delete(`/tasks/${id}`);
