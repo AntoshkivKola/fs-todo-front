@@ -79,7 +79,7 @@ function taskReducer (state = initialState, action) {
       } = action;
 
       const updateTaskIndex = tasks.findIndex(({ id }) => id === updateTask.id);
-      tasks[updateTaskIndex].isDone = updateTask.isDone;
+      tasks[updateTaskIndex] = updateTask;
 
       return {
         ...state,
