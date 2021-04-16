@@ -33,7 +33,7 @@ function taskReducer (state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        error: error,
+        error: error.response.data.errors[0],
       };
     }
     //
@@ -62,7 +62,7 @@ function taskReducer (state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        error: error,
+        error: error.response.data.errors[0],
       };
     }
     //
@@ -95,7 +95,7 @@ function taskReducer (state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        error: error,
+        error: error.response.data.errors[0],
       };
     }
     //
@@ -125,10 +125,10 @@ function taskReducer (state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        error: error,
+        error: error.response.data.errors[0],
       };
     }
-    // 
+    //
     case ACTION_TYPES.CLOSE_TASK_ERROR: {
       return {
         ...state,

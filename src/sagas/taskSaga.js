@@ -13,7 +13,7 @@ export function * createTaskSaga (action) {
   } catch (error) {
     yield put(
       TaskActionCreator.createTaskError({
-        error: error.response.data.errors[0],
+        error,
       })
     );
   }
